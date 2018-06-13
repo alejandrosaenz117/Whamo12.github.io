@@ -1,0 +1,22 @@
+{
+  "name": "whamo12.github.io",
+  "version": "1.0.0",
+  "description": "Professional Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Whamo12/Whamo12.github.io.git"
+  },
+  "author": "Alejandro Saenz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Whamo12/Whamo12.github.io/issues"
+  },
+  "homepage": "https://github.com/Whamo12/Whamo12.github.io#readme",
+  "dependencies": {
+    "startbootstrap-resume": "^4.0.0"
+  }
+}
