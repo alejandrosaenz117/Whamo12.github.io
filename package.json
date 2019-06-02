@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Whamo12/Whamo12.github.io#readme",
   "dependencies": {
-    "startbootstrap-resume": "^4.0.0"
+    "startbootstrap-resume": "^5.0.6"
   }
 }
