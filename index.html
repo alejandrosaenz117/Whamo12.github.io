@@ -12,6 +12,16 @@
     gtag('config', 'UA-121336209-1');
   </script>
 
+  <script>
+    !function () {
+      var analytics = window.analytics = window.analytics || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+        analytics.invoked = !0; analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware"]; analytics.factory = function (e) { return function () { var t = Array.prototype.slice.call(arguments); t.unshift(e); analytics.push(t); return analytics } }; for (var e = 0; e < analytics.methods.length; e++) { var key = analytics.methods[e]; analytics[key] = analytics.factory(key) } analytics.load = function (key, e) { var t = document.createElement("script"); t.type = "text/javascript"; t.async = !0; t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js"; var n = document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(t, n); analytics._loadOptions = e }; analytics._writeKey = "dV0vCKbcFK5t3sh7yrYQaz3acvQEtPDk"; analytics.SNIPPET_VERSION = "4.13.2";
+        analytics.load("dV0vCKbcFK5t3sh7yrYQaz3acvQEtPDk");
+        analytics.page();
+      }
+    }();
+  </script>
+
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -141,7 +151,8 @@
               <li>Research and develop internal security tools to optimize team performance</li>
               <li>Provide application security training including brown bags, lectures, and hands-on laboratories</li>
               <li>Lead and assist technical interviews for software developer and security candidates</li>
-              <li>Lead developer of <a href="https://github.com/softrams/bulwark" target="_blank">Bulwark</a> an organizational asset and vulnerability management tool</li>
+              <li>Lead developer of <a href="https://github.com/softrams/bulwark" target="_blank">Bulwark</a> an
+                organizational asset and vulnerability management tool</li>
             </ul>
           </div>
           <div class="resume-date text-md-right">
@@ -274,7 +285,8 @@
       <div class="my-auto">
         <h2 class="mb-5">Interests</h2>
         <p>Apart from being an Application Security Engineer and Software developer, I enjoy the outdoors with my
-          wife, son, daughter, and dog. In the warmer months, my family and I spend the time back country camping, outdoor
+          wife, son, daughter, and dog. In the warmer months, my family and I spend the time back country camping,
+          outdoor
           climbing, hiking, or simply relaxing by the pool. In the colder months, I enjoy watching movies with the
           family, coding, cooking, and indoor climbing. Additionally, my wife and I love photography!
           You can see our work below!</p>
