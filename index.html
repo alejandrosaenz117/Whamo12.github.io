@@ -39,11 +39,38 @@
       .gallery {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px; /* Space between images */
+        gap: 10px; /* Adjust the gap between images as needed */
       }
       .gallery img {
-        width: 450px; /* Set the desired width */
-        height: auto; /* Maintain aspect ratio */
+        flex: 1 1 calc(25% - 10px); /* Four images per row with space for gaps */
+        max-width: 100%;
+        height: auto;
+      }
+      @media (max-width: 768px) {
+        .gallery img {
+          flex: 1 1 calc(33.33% - 10px); /* Three images per row on tablets */
+        }
+      }
+      @media (max-width: 480px) {
+        .gallery img {
+          flex: 1 1 calc(50% - 10px); /* Two images per row on mobile */
+        }
+      }
+      .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background: #000;
+      }
+      .video-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
       }
     </style>
   </head>
@@ -326,16 +353,18 @@
                 I shared insights about my career trajectory, the importance of documentation in security, and even
                 reminisced about stories from the past.
               </div>
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/isK4slLzk-U?si=ucTKrki0WzuU1hmT"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+              <div class="video-wrapper">
+                <iframe
+                  width="auto"
+                  height="auto"
+                  src="https://www.youtube.com/embed/isK4slLzk-U?si=ucTKrki0WzuU1hmT"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
             </div>
             <div class="resume-date text-md-right">
               <span class="text-primary">June 11, 2024</span>
@@ -426,7 +455,7 @@
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 5"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true"
@@ -434,59 +463,59 @@
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 7"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 8"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 9"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 10"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true"
-              alt="Image 5"
+              alt="Image 11"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 12"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true"
-              alt="Image 2"
+              alt="Image 13"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true"
-              alt="Image 3"
+              alt="Image 14"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true"
-              alt="Image 4"
+              alt="Image 15"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true"
-              alt="Image 5"
+              alt="Image 16"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 17"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 18"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 19"
             />
             <img
               src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true"
-              alt="Image 6"
+              alt="Image 20"
             />
           </div>
         </div>
