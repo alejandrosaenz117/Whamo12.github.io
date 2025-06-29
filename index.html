@@ -7,6 +7,38 @@
       analytics.page();
       }}();
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener("click", function (event) {
+          let target = event.target;
+    
+          // Find the closest clickable element (useful for icons inside links)
+          if (target.tagName === "I" || target.tagName === "SPAN") {
+            target = target.closest("a, button, img, div, section") || target;
+          }
+    
+          let tagName = target.tagName.toLowerCase();
+          let text = target.innerText.trim().substring(0, 50) || null; // Capture first 50 chars of text
+          let id = target.id || null;
+          let classes = target.className || null;
+          let href = target.getAttribute("href") || null;
+          let src = target.getAttribute("src") || null; // Capture image clicks
+    
+          // Only track if it's an interactive element
+          if (tagName === "a" || tagName === "button" || tagName === "img" || href || src) {
+            analytics.track("User Clicked", {
+              tagName: tagName,
+              text: text,
+              id: id,
+              classes: classes,
+              href: href,
+              src: src,
+              pagePath: window.location.pathname
+            });
+          }
+        });
+      });
+    </script>    
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -77,6 +109,318 @@
         width: 100%;
         height: 100%;
         border: 0;
+      }
+
+      /* Modern Photo Carousel Styles */
+      .photo-carousel {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        margin: 30px 0;
+      }
+
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out, transform 0.5s ease;
+        transform: scale(1.05);
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+
+      .carousel-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+        padding: 30px;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .carousel-counter {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        backdrop-filter: blur(10px);
+      }
+
+      .carousel-controls {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .carousel-dot.active {
+        background: white;
+        transform: scale(1.2);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      }
+
+      .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+        z-index: 10;
+      }
+
+      .carousel-nav:hover {
+        background: rgba(0, 0, 0, 0.8);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .carousel-nav.prev {
+        left: 20px;
+      }
+
+      .carousel-nav.next {
+        right: 20px;
+      }
+
+      .carousel-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 0 0 20px 20px;
+        transform-origin: left;
+        animation: progress 5s linear infinite;
+      }
+
+      @keyframes progress {
+        0% { transform: scaleX(0); }
+        100% { transform: scaleX(1); }
+      }
+
+      .interests-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      @media (max-width: 768px) {
+        .interests-content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        
+        .photo-carousel {
+          height: 300px;
+        }
+        
+        .carousel-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+        }
+      }
+
+      /* Fullscreen Modal Styles */
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(5px);
+      }
+
+      .fullscreen-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .modal-content {
+        position: relative;
+        max-width: 95%;
+        max-height: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+        animation: zoomIn 0.3s ease-out;
+      }
+
+      @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 10000;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
+
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        z-index: 10000;
+      }
+
+      .modal-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .modal-nav.prev {
+        left: 20px;
+      }
+
+      .modal-nav.next {
+        right: 20px;
+      }
+
+      .modal-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 16px;
+        backdrop-filter: blur(10px);
+        z-index: 10000;
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .carousel-slide img:hover {
+        transform: scale(1.02);
+      }
+
+      @media (max-width: 768px) {
+        .modal-nav {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+        
+        .modal-close {
+          width: 45px;
+          height: 45px;
+          font-size: 20px;
+        }
       }
     </style>
   </head>
@@ -466,93 +810,130 @@
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
         <div class="my-auto">
           <h2 class="mb-5">Interests</h2>
-          <p>
-            Apart from being an Application Security Engineer and Software developer, I enjoy the outdoors with my wife,
-            son, two daughters, and dog. In the warmer months, my family and I spend the time back country camping,
-            outdoor climbing, hiking, or simply relaxing by the pool. In the colder months, I enjoy watching movies with
-            the family, coding, cooking, and indoor climbing. Additionally, my wife and I love photography! You can see
-            our work below!
-          </p>
-          <div class="gallery">
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true"
-              alt="Image 1"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3353.jpg?raw=true"
-              alt="Image 2"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3428.jpg?raw=true"
-              alt="Image 3"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3454.jpg?raw=true"
-              alt="Image 4"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true"
-              alt="Image 5"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true"
-              alt="Image 6"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true"
-              alt="Image 7"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true"
-              alt="Image 9"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true"
-              alt="Image 10"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true"
-              alt="Image 11"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true"
-              alt="Image 12"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true"
-              alt="Image 13"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true"
-              alt="Image 14"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true"
-              alt="Image 15"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true"
-              alt="Image 16"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true"
-              alt="Image 17"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true"
-              alt="Image 18"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true"
-              alt="Image 19"
-            />
-            <img
-              src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true"
-              alt="Image 20"
-            />
+          
+          <div class="mb-5">
+            <p class="lead">
+              Apart from being an Application Security Engineer and Software developer, I enjoy the outdoors with my wife,
+              son, two daughters, and dog. In the warmer months, my family and I spend the time back country camping,
+              outdoor climbing, hiking, or simply relaxing by the pool.
+            </p>
+            <p>
+              In the colder months, I enjoy watching movies with
+              the family, coding, cooking, and indoor climbing. Additionally, my wife and I love photography! Check out
+              our work in the gallery below.
+            </p>
+          </div>
+          
+          <div class="photo-carousel">
+            <div class="carousel-container">
+              <div class="carousel-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">20</span>
+              </div>
+              
+              <button class="carousel-nav prev" onclick="changeSlide(-1)">‹</button>
+              <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
+              
+              <div class="carousel-slide active">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true" alt="Landscape Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3353.jpg?raw=true" alt="Nature Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3428.jpg?raw=true" alt="Mountain Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3454.jpg?raw=true" alt="Scenic Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true" alt="Adventure Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true" alt="Travel Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true" alt="Panoramic Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true" alt="Outdoor Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true" alt="Waterfall Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true" alt="Panoramic Landscape" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true" alt="Wide Landscape" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true" alt="Vista Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true" alt="Natural Beauty" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true" alt="Scenic Views" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true" alt="Landscape Art" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true" alt="Cityscape Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true" alt="Horizon Photography" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true" alt="Edited Landscape" />
+              </div>
+              <div class="carousel-slide">
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true" alt="Night Photography" />
+              </div>
+              
+              <div class="carousel-controls">
+                <span class="carousel-dot active" onclick="currentSlide(1)"></span>
+                <span class="carousel-dot" onclick="currentSlide(2)"></span>
+                <span class="carousel-dot" onclick="currentSlide(3)"></span>
+                <span class="carousel-dot" onclick="currentSlide(4)"></span>
+                <span class="carousel-dot" onclick="currentSlide(5)"></span>
+                <span class="carousel-dot" onclick="currentSlide(6)"></span>
+                <span class="carousel-dot" onclick="currentSlide(7)"></span>
+                <span class="carousel-dot" onclick="currentSlide(8)"></span>
+                <span class="carousel-dot" onclick="currentSlide(9)"></span>
+                <span class="carousel-dot" onclick="currentSlide(10)"></span>
+                <span class="carousel-dot" onclick="currentSlide(11)"></span>
+                <span class="carousel-dot" onclick="currentSlide(12)"></span>
+                <span class="carousel-dot" onclick="currentSlide(13)"></span>
+                <span class="carousel-dot" onclick="currentSlide(14)"></span>
+                <span class="carousel-dot" onclick="currentSlide(15)"></span>
+                <span class="carousel-dot" onclick="currentSlide(16)"></span>
+                <span class="carousel-dot" onclick="currentSlide(17)"></span>
+                <span class="carousel-dot" onclick="currentSlide(18)"></span>
+                <span class="carousel-dot" onclick="currentSlide(19)"></span>
+                <span class="carousel-dot" onclick="currentSlide(20)"></span>
+              </div>
+              
+              <div class="carousel-progress"></div>
+            </div>
           </div>
         </div>
       </section>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div id="fullscreen-modal" class="fullscreen-modal">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <button class="modal-nav prev" onclick="modalChangeSlide(-1)">‹</button>
+      <button class="modal-nav next" onclick="modalChangeSlide(1)">›</button>
+      
+      <div class="modal-content">
+        <img id="modal-image" class="modal-image" src="" alt="">
+      </div>
+      
+      <div class="modal-counter">
+        <span id="modal-current">1</span> / <span id="modal-total">20</span>
+      </div>
     </div>
 
     <!-- Bootstrap core JavaScript -->
@@ -564,5 +945,222 @@
 
     <!-- Custom scripts for this template -->
     <script src="./node_modules/startbootstrap-resume/js/resume.min.js"></script>
+    
+    <!-- Modern Photo Carousel Script -->
+    <script>
+      let currentSlideIndex = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const totalSlides = slides.length;
+      
+      // Image sources array for modal
+      const imageSources = [
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3353.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3428.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3454.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true",
+        "https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true"
+      ];
+      
+      // Update slide counter and total
+      document.getElementById('total-slides').textContent = totalSlides;
+      document.getElementById('modal-total').textContent = totalSlides;
+      
+      function showSlide(index) {
+        // Hide all slides and remove active class from dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Show current slide and activate corresponding dot
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        
+        // Update counter
+        document.getElementById('current-slide').textContent = index + 1;
+      }
+      
+      function changeSlide(direction) {
+        currentSlideIndex += direction;
+        
+        if (currentSlideIndex >= totalSlides) {
+          currentSlideIndex = 0;
+        } else if (currentSlideIndex < 0) {
+          currentSlideIndex = totalSlides - 1;
+        }
+        
+        showSlide(currentSlideIndex);
+      }
+      
+      function currentSlide(index) {
+        currentSlideIndex = index - 1;
+        showSlide(currentSlideIndex);
+      }
+      
+      // Auto-advance slides every 5 seconds
+      function startAutoSlide() {
+        return setInterval(() => {
+          changeSlide(1);
+        }, 5000);
+      }
+      
+      // Initialize carousel
+      let autoSlideInterval = startAutoSlide();
+      
+      // Pause auto-advance when user interacts with carousel
+      const carousel = document.querySelector('.photo-carousel');
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoSlideInterval);
+      });
+      
+      carousel.addEventListener('mouseleave', () => {
+        autoSlideInterval = startAutoSlide();
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          changeSlide(-1);
+        } else if (e.key === 'ArrowRight') {
+          changeSlide(1);
+        }
+      });
+      
+      // Touch/swipe support for mobile
+      let startX = 0;
+      let startY = 0;
+      
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      });
+      
+      carousel.addEventListener('touchend', (e) => {
+        if (!startX || !startY) return;
+        
+        let endX = e.changedTouches[0].clientX;
+        let endY = e.changedTouches[0].clientY;
+        
+        let diffX = startX - endX;
+        let diffY = startY - endY;
+        
+        // Only trigger if horizontal swipe is more significant than vertical
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+          if (Math.abs(diffX) > 50) { // Minimum swipe distance
+            if (diffX > 0) {
+              changeSlide(1); // Swipe left - next slide
+            } else {
+              changeSlide(-1); // Swipe right - previous slide
+            }
+          }
+        }
+        
+        startX = 0;
+        startY = 0;
+      });
+
+      // Modal functionality
+      function openModal(imageIndex = null) {
+        const modal = document.getElementById('fullscreen-modal');
+        const modalImage = document.getElementById('modal-image');
+        
+        // If no specific index is provided, use the current slide index
+        const indexToShow = imageIndex !== null ? imageIndex : currentSlideIndex;
+        
+        modal.classList.add('active');
+        modalImage.src = imageSources[indexToShow];
+        currentSlideIndex = indexToShow;
+        updateModalCounter();
+        
+        // Pause carousel auto-advance when modal is open
+        clearInterval(autoSlideInterval);
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        const modal = document.getElementById('fullscreen-modal');
+        modal.classList.remove('active');
+        
+        // Resume carousel auto-advance
+        autoSlideInterval = startAutoSlide();
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+      }
+
+      function modalChangeSlide(direction) {
+        currentSlideIndex += direction;
+        
+        if (currentSlideIndex >= totalSlides) {
+          currentSlideIndex = 0;
+        } else if (currentSlideIndex < 0) {
+          currentSlideIndex = totalSlides - 1;
+        }
+        
+        const modalImage = document.getElementById('modal-image');
+        modalImage.src = imageSources[currentSlideIndex];
+        updateModalCounter();
+        
+        // Also update the main carousel
+        showSlide(currentSlideIndex);
+      }
+
+      function updateModalCounter() {
+        document.getElementById('modal-current').textContent = currentSlideIndex + 1;
+      }
+
+      // Add click listeners to carousel images
+      slides.forEach((slide, index) => {
+        const img = slide.querySelector('img');
+        img.addEventListener('click', () => {
+          // Always open the modal with the currently active slide
+          openModal(currentSlideIndex);
+        });
+      });
+
+      // Close modal when clicking outside the image
+      document.getElementById('fullscreen-modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+          closeModal();
+        }
+      });
+
+      // Keyboard navigation for modal
+      document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('fullscreen-modal');
+        if (modal.classList.contains('active')) {
+          if (e.key === 'Escape') {
+            closeModal();
+          } else if (e.key === 'ArrowLeft') {
+            modalChangeSlide(-1);
+          } else if (e.key === 'ArrowRight') {
+            modalChangeSlide(1);
+          }
+        } else {
+          // Original keyboard navigation for carousel
+          if (e.key === 'ArrowLeft') {
+            changeSlide(-1);
+          } else if (e.key === 'ArrowRight') {
+            changeSlide(1);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
