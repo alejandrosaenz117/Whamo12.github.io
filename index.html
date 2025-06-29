@@ -44,55 +44,199 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//github.com">
+
     <title>Alejandro Saenz Professional Portfolio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./profile.png" />
+    <link rel="shortcut icon" href="./profile.png" />
+    <link rel="apple-touch-icon" href="./profile.png" />
 
     <!-- Bootstrap core CSS -->
     <link href="./node_modules/startbootstrap-resume/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Custom fonts for this template -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-      rel="stylesheet"
-    />
-    <link href="./node_modules/startbootstrap-resume/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="./profile.png" as="image">
+    <link rel="preload" href="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true" as="image">
+     <!-- Custom fonts for this template -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
 
     <!-- Custom styles for this template -->
     <link href="./node_modules/startbootstrap-resume/css/resume.min.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-    />
 
     <!-- Your custom CSS for the list items -->
     <style>
-      /* Apply a common style to all list items within the .list-inline class */
+      /* CSS Custom Properties for Modern Orange Theme */
+      :root {
+        --primary-color: #ff6b35;
+        --secondary-color: #f7931e;
+        --accent-color: #ff9500;
+        --text-primary: #2c3e50;
+        --text-secondary: #7f8c8d;
+        --bg-primary: #ffffff;
+        --bg-secondary: #fff8f5;
+        --shadow-light: 0 2px 10px rgba(255, 107, 53, 0.15);
+        --shadow-medium: 0 8px 30px rgba(255, 107, 53, 0.20);
+        --shadow-heavy: 0 20px 40px rgba(255, 107, 53, 0.25);
+        --border-radius: 15px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Smooth scrolling and improved typography */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+      }
+
+      /* Modern section styling with animations */
+      .resume-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: var(--transition);
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Enhanced navigation */
+      #sideNav {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+        backdrop-filter: blur(10px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      #sideNav .navbar-nav .nav-link {
+        position: relative;
+        transition: var(--transition);
+        border-radius: var(--border-radius);
+        margin: 2px 0;
+      }
+
+      #sideNav .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(5px);
+      }
+
+      #sideNav .navbar-nav .nav-link::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 0;
+        background: var(--accent-color);
+        transition: var(--transition);
+        border-radius: 2px;
+      }
+
+      #sideNav .navbar-nav .nav-link:hover::before {
+        height: 70%;
+      }
+
+      /* Modern card design for experience items */
+      .resume-item {
+        background: var(--bg-primary);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .resume-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      /* Enhanced typography */
+      h1, h2, h3 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h2 {
+        color: var(--text-primary);
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        border-radius: 2px;
+      }
+
+      /* Print-friendly styles for PDF export */
+      @media print {
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        body { font-family: 'Times New Roman', serif !important; font-size: 10pt !important; line-height: 1.3 !important; color: #000 !important; margin: 0 !important; padding: 0 !important; }
+        #sideNav, .photo-carousel, .fullscreen-modal, .video-wrapper { display: none !important; }
+        .container-fluid { padding: 0.5in !important; max-width: none !important; }
+        #about h1 { font-size: 24pt !important; color: #2c3e50 !important; -webkit-text-fill-color: initial !important; background: none !important; margin-bottom: 0.2rem !important; text-align: center; }
+        #about .subheading { display: none !important; }
+        #about .lead { font-size: 9pt !important; margin-bottom: 0.5rem !important; text-align: justify; }
+        #about .list-social-icons { text-align: center; margin-bottom: 0.5rem !important; }
+        .resume-section { page-break-inside: avoid; padding: 0.3rem 0 !important; margin-bottom: 0.5rem !important; animation: none; opacity: 1; transform: none; }
+        .resume-section h2 { font-size: 14pt !important; color: #2c3e50 !important; border-bottom: 2px solid #2c3e50 !important; padding-bottom: 0.1rem !important; margin-bottom: 0.3rem !important; page-break-after: avoid; }
+        .resume-section h2::after { display: none !important; }
+        .resume-item { box-shadow: none !important; border: none !important; padding: 0.2rem 0 !important; margin-bottom: 0.3rem !important; page-break-inside: avoid; background: none !important; }
+        .resume-item h3 { font-size: 11pt !important; font-weight: bold !important; margin-bottom: 0.1rem !important; color: #000 !important; }
+        .subheading { font-size: 10pt !important; font-style: italic !important; margin-bottom: 0.1rem !important; }
+        .resume-date { font-size: 9pt !important; font-weight: bold !important; color: #666 !important; }
+        .resume-item ul { margin-top: 0.1rem !important; margin-bottom: 0.2rem !important; padding-left: 1rem !important; }
+        .resume-item li { font-size: 9pt !important; margin-bottom: 0.1rem !important; line-height: 1.2 !important; }
+        .skills-grid { display: block !important; }
+        .skill-item { display: inline-block !important; margin: 0.1rem 0.3rem !important; padding: 0.1rem 0.3rem !important; border: 1px solid #ccc !important; border-radius: 3px !important; background: none !important; box-shadow: none !important; }
+        .skill-item i { display: none !important; }
+        .skill-label { font-size: 9pt !important; margin: 0 !important; color: #000 !important; }
+        #interests .photo-carousel { display: none !important; }
+        a { color: #000 !important; text-decoration: none !important; }
+        @page { margin: 0.5in; size: letter; }
+      }
+
       .list-inline-item i {
-        font-size: 50px; /* Adjust the font-size as needed */
+        font-size: 50px;
+        transition: var(--transition);
       }
-      .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; /* Adjust the gap between images as needed */
-      }
-      .gallery img {
-        flex: 1 1 calc(25% - 10px); /* Four images per row with space for gaps */
-        max-width: 100%;
-        height: auto;
-      }
-      @media (max-width: 768px) {
-        .gallery img {
-          flex: 1 1 calc(33.33% - 10px); /* Three images per row on tablets */
-        }
-      }
-      @media (max-width: 480px) {
-        .gallery img {
-          flex: 1 1 calc(50% - 10px); /* Two images per row on mobile */
-        }
+
+      .list-inline-item i:hover {
+        transform: scale(1.1) rotate(5deg);
       }
       .video-wrapper {
         position: relative;
@@ -118,8 +262,8 @@
         height: 600px;
         overflow: hidden;
         border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        background: linear-gradient(45deg, #ff6b35 0%, #f7931e 100%);
         margin: 30px 0;
       }
 
@@ -240,7 +384,7 @@
         bottom: 0;
         left: 0;
         height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
+        background: linear-gradient(90deg, #ff6b35, #f7931e);
         border-radius: 0 0 20px 20px;
         transform-origin: left;
         animation: progress 5s linear infinite;
@@ -409,17 +553,285 @@
         transform: scale(1.02);
       }
 
+      /* Modern Skills Section */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .skill-item {
+        background: var(--bg-primary);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: var(--transition);
+      }
+
+      .skill-item:hover::before {
+        left: 100%;
+      }
+
+      .skill-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .skill-item i {
+        font-size: 3rem !important;
+        margin-bottom: 1rem;
+        transition: var(--transition);
+      }
+
+      .skill-item:hover i {
+        transform: scale(1.2);
+      }
+
+      .skill-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+      }
+
+      /* Typing animation */
+      .cursor {
+        display: inline-block;
+        background-color: var(--primary-color);
+        margin-left: 0.1rem;
+        width: 3px;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      #typed-text {
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+
+      /* Responsive improvements */
       @media (max-width: 768px) {
-        .modal-nav {
-          width: 50px;
-          height: 50px;
-          font-size: 20px;
+        .skills-grid {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          gap: 1rem;
         }
         
-        .modal-close {
-          width: 45px;
-          height: 45px;
-          font-size: 20px;
+        .skill-item {
+          padding: 1rem;
+        }
+        
+        .skill-item i {
+          font-size: 2rem !important;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        #typed-text {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Open Source Repository Cards */
+      .repo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .repo-card {
+        background: var(--bg-primary);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-light);
+        transition: var(--transition);
+        border: 1px solid rgba(255, 107, 53, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .repo-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+      }
+
+      .repo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-medium);
+        border-color: var(--primary-color);
+      }
+
+      .repo-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .repo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      .repo-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        margin: 0;
+      }
+
+      .repo-title:hover {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .repo-description {
+        color: var(--text-secondary);
+        margin: 1rem 0;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .repo-stats {
+        display: flex;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+      }
+
+      .repo-stat {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .repo-stat i {
+        color: var(--primary-color);
+        font-size: 1rem;
+      }
+
+      .repo-language {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--bg-secondary);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+      }
+
+      .language-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .repo-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .repo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+
+      .repo-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        color: white;
+        text-decoration: none;
+      }
+
+      .repo-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        color: var(--text-secondary);
+      }
+
+      .loading-spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--bg-secondary);
+        border-top: 2px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      @media (max-width: 768px) {
+        .repo-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        
+        .repo-card {
+          padding: 1.5rem;
+        }
+        
+        .repo-stats {
+          gap: 1rem;
+        }
+        
+        .repo-links {
+          flex-direction: column;
         }
       }
     </style>
@@ -452,13 +864,16 @@
             <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#blogs">Podcasts & Talks </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+            <a class="nav-link js-scroll-trigger" href="#blogs">Content & Speaking</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#opensource">Open Source</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
@@ -474,8 +889,10 @@
             Alejandro
             <span class="text-primary">Saenz</span>
           </h1>
-          <br />
-          <p class="mb-5">
+          <div class="subheading mb-5">
+            <span id="typed-text"></span><span class="cursor">|</span>
+          </div>
+          <p class="lead mb-5">
             Self-motivated, results-driven professional with excellent people skills, strong decision making abilities,
             strong oral and written communication skills, and a high standard of work ethic, seeking a position that
             promotes learning, encourages innovation, and supports the pursuit of discovery and excellence in the fields
@@ -483,12 +900,12 @@
           </p>
           <ul class="list-inline list-social-icons mb-0">
             <li class="list-inline-item">
-              <a href="https://www.linkedin.com/in/saenzag/" target="_blank">
+              <a href="https://www.linkedin.com/in/saenzag/" target="_blank" aria-label="LinkedIn Profile">
                 <i class="devicon-linkedin-plain colored"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a href="https://github.com/alejandrosaenz117" target="_blank">
+              <a href="https://github.com/alejandrosaenz117" target="_blank" aria-label="GitHub Profile">
                 <i class="devicon-github-original colored"></i>
               </a>
             </li>
@@ -505,7 +922,9 @@
               <h3 class="mb-0">Staff Product Security Engineer</h3>
               <span class="subheading mb-3"><a target="_blank" href="https://www.twilio.com/">Twilio</a></span>
               <ul>
-                <!-- Work in progress! -->
+                <li>Lead strategic security initiatives across multiple product teams and engineering organizations</li>
+                <li>Architect and implement enterprise-scale security frameworks and automation solutions</li>
+                <li>Drive security culture transformation through mentoring, training, and cross-functional collaboration</li>
               </ul>
             </div>
             <div class="resume-date text-md-right">
@@ -697,7 +1116,7 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="blogs">
         <div class="my-auto">
-          <h2 class="mb-5">Podcasts & Talks</h2>
+          <h2 class="mb-5">Content & Speaking</h2>
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
             <div class="resume-content mr-auto">
               <h3 class="mb-0">DevSecCon 2024: From Novice to Catalyst: Scaling Security tools with Metrics</h3>
@@ -724,6 +1143,51 @@
             </div>
             <div class="resume-date text-md-right">
               <span class="text-primary">October 22, 2024</span>
+            </div>
+          </div>
+          
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Ten Years of Bug Bounty Programs: Updates to Twilio's Approach</h3>
+              <span class="subheading mb-3">Featured in <a target="_blank" href="https://www.twilio.com/en-us/blog/company/news/ten-years-bug-bounty-updates">Twilio Blog</a></span>
+              <div>
+                Featured expert contributing insights on Twilio's evolving bug bounty program strategy and security practices. 
+                The article highlights how our approach to vulnerability disclosure and researcher engagement has matured over 
+                the past decade, reflecting on lessons learned and future improvements to our security posture.
+              </div>
+              <br>
+              <div>
+                <a href="https://www.twilio.com/en-us/blog/company/news/ten-years-bug-bounty-updates" target="_blank" class="repo-link" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-decoration: none; border-radius: 25px; font-size: 0.9rem; font-weight: 500; transition: var(--transition);">
+                  <i class="fas fa-external-link-alt"></i>
+                  Read Article
+                </a>
+              </div>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">December 2024</span>
+            </div>
+          </div>
+          
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Bulwark Featured in TL;DR Sec Newsletter</h3>
+              <span class="subheading mb-3">Featured in <a target="_blank" href="https://tldrsec.com/p/tldr-sec-50">TL;DR Sec #50</a></span>
+              <div>
+                Bulwark, an organizational asset and vulnerability management tool I led development on at Softrams, 
+                was featured in the popular TL;DR Sec newsletter. The newsletter highlighted Bulwark as a notable 
+                open-source security tool for organizations looking to improve their vulnerability management and 
+                security posture tracking capabilities.
+              </div>
+              <br>
+              <div>
+                <a href="https://tldrsec.com/p/tldr-sec-50" target="_blank" class="repo-link" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-decoration: none; border-radius: 25px; font-size: 0.9rem; font-weight: 500; transition: var(--transition);">
+                  <i class="fas fa-external-link-alt"></i>
+                  Read Newsletter
+                </a>
+              </div>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">2020</span>
             </div>
           </div>
           <div class="resume-item d-flex flex-column flex-md-row mb-5">
@@ -754,6 +1218,212 @@
         </div>
       </section>
 
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
+        <div class="my-auto">
+          <h2 class="mb-5">Skills</h2>
+
+          <div class="subheading mb-4">Technologies</div>
+          <div class="skills-grid">
+            <!-- Programming Languages -->
+            <div class="skill-item">
+              <i class="devicon-typescript-plain colored"></i>
+              <div class="skill-label">TypeScript</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-javascript-plain colored"></i>
+              <div class="skill-label">JavaScript</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-python-plain colored"></i>
+              <div class="skill-label">Python</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-java-plain colored"></i>
+              <div class="skill-label">Java</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-html5-plain colored"></i>
+              <div class="skill-label">HTML5</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-css3-plain colored"></i>
+              <div class="skill-label">CSS3</div>
+            </div>
+            
+            <!-- Frameworks & Libraries -->
+            <div class="skill-item">
+              <i class="devicon-angularjs-plain colored"></i>
+              <div class="skill-label">Angular</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-nodejs-plain colored"></i>
+              <div class="skill-label">Node.js</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-bootstrap-plain colored"></i>
+              <div class="skill-label">Bootstrap</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-cloud"></i>
+              <div class="skill-label">Serverless</div>
+            </div>
+            
+            <!-- Cloud & Infrastructure -->
+            <div class="skill-item">
+              <i class="devicon-amazonwebservices-plain-wordmark colored"></i>
+              <div class="skill-label">AWS</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-docker-plain colored"></i>
+              <div class="skill-label">Docker</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-rocket"></i>
+              <div class="skill-label">Buildkite</div>
+            </div>
+            
+            <!-- Databases -->
+            <div class="skill-item">
+              <i class="devicon-mysql-plain colored"></i>
+              <div class="skill-label">MySQL</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-postgresql-plain colored"></i>
+              <div class="skill-label">PostgreSQL</div>
+            </div>
+            
+            <!-- Version Control & Tools -->
+            <div class="skill-item">
+              <i class="devicon-git-plain colored"></i>
+              <div class="skill-label">Git</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-github-original colored"></i>
+              <div class="skill-label">GitHub</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-npm-original-wordmark colored"></i>
+              <div class="skill-label">NPM</div>
+            </div>
+            <div class="skill-item">
+              <i class="devicon-yarn-plain colored"></i>
+              <div class="skill-label">Yarn</div>
+            </div>
+            <div class="skill-item">
+              <i class="fab fa-atlassian"></i>
+              <div class="skill-label">Atlassian Suite</div>
+            </div>
+            
+            <!-- Security Tools -->
+            <div class="skill-item">
+              <i class="fas fa-shield-virus"></i>
+              <div class="skill-label">Snyk</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-robot"></i>
+              <div class="skill-label">Dependabot</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-code"></i>
+              <div class="skill-label">Semgrep</div>
+            </div>
+            <div class="skill-item">
+              <i class="fab fa-github-alt"></i>
+              <div class="skill-label">GitHub Advanced Security</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-user-secret"></i>
+              <div class="skill-label">TruffleHog</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-trophy"></i>
+              <div class="skill-label">Bugcrowd</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-sitemap"></i>
+              <div class="skill-label">AssetNote</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-crosshairs"></i>
+              <div class="skill-label">Burp Suite Pro</div>
+            </div>
+          </div>
+
+          <div class="subheading mb-4 mt-5">Security Practices & Methodologies</div>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <i class="fas fa-microscope"></i>
+              <div class="skill-label">Static Code Analysis</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-shield-virus"></i>
+              <div class="skill-label">SAST</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-cube"></i>
+              <div class="skill-label">Threat Modeling</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-chart-line"></i>
+              <div class="skill-label">Security Metrics</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-clipboard-check"></i>
+              <div class="skill-label">OWASP SAMM</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-lock"></i>
+              <div class="skill-label">SLSA Framework</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-code-branch"></i>
+              <div class="skill-label">Secure SDLC</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-users-cog"></i>
+              <div class="skill-label">Security Training</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-balance-scale"></i>
+              <div class="skill-label">Risk Assessment</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-file-contract"></i>
+              <div class="skill-label">Compliance</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-handshake"></i>
+              <div class="skill-label">Vendor Security</div>
+            </div>
+            <div class="skill-item">
+              <i class="fas fa-eye"></i>
+              <div class="skill-label">Security Reviews</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="opensource">
+        <div class="my-auto">
+          <h2 class="mb-5">Open Source Contributions</h2>
+          
+          <div class="mb-4">
+            <p class="lead">
+              I'm passionate about contributing to the open source community and building tools that help other developers and security professionals.
+              Here are some of my notable projects:
+            </p>
+          </div>
+          
+          <div class="repo-grid" id="repo-container">
+            <!-- Repository cards will be dynamically loaded here -->
+            <div class="repo-loading">
+              <div class="loading-spinner"></div>
+              Loading repositories...
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
         <div class="my-auto">
           <h2 class="mb-5">Education</h2>
@@ -767,43 +1437,6 @@
               <span class="text-primary">August 2009 - December 2013</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-        <div class="my-auto">
-          <h2 class="mb-5">Skills</h2>
-
-          <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-          <ul class="list-inline list-icons">
-            <li class="list-inline-item">
-              <i class="devicon-typescript-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-angularjs-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-nodejs-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-javascript-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-python-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-java-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-npm-original-wordmark colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-yarn-plain colored"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicon-amazonwebservices-plain-wordmark colored"></i>
-            </li>
-          </ul>
         </div>
       </section>
 
@@ -834,61 +1467,61 @@
               <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
               
               <div class="carousel-slide active">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true" alt="Landscape Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B0718.jpg?raw=true" alt="Landscape Photography" decoding="async" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3353.jpg?raw=true" alt="Nature Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3353.jpg?raw=true" alt="Nature Photography" loading="lazy" decoding="async" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3428.jpg?raw=true" alt="Mountain Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3428.jpg?raw=true" alt="Mountain Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3454.jpg?raw=true" alt="Scenic Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3454.jpg?raw=true" alt="Scenic Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true" alt="Adventure Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_5558-3.jpg?raw=true" alt="Adventure Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true" alt="Travel Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6272.jpg?raw=true" alt="Travel Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true" alt="Panoramic Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6275-Pano-2.jpg?raw=true" alt="Panoramic Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true" alt="Outdoor Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_6847-2.jpg?raw=true" alt="Outdoor Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true" alt="Waterfall Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/Seljalandsfoss.jpg?raw=true" alt="Waterfall Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true" alt="Panoramic Landscape" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3527-Pano.jpg?raw=true" alt="Panoramic Landscape" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true" alt="Wide Landscape" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3553-Pano.jpg?raw=true" alt="Wide Landscape" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true" alt="Vista Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B3603-Pano.jpg?raw=true" alt="Vista Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true" alt="Natural Beauty" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B5050-2.jpg?raw=true" alt="Natural Beauty" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true" alt="Scenic Views" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B6591-2.jpg?raw=true" alt="Scenic Views" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true" alt="Landscape Art" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/7K0B7648-3.jpg?raw=true" alt="Landscape Art" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true" alt="Cityscape Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/ArthursSeatCityscape.jpg?raw=true" alt="Cityscape Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true" alt="Horizon Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_0470-Pano.jpg?raw=true" alt="Horizon Photography" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true" alt="Edited Landscape" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_landscape/IMG_4691-Edit.jpg?raw=true" alt="Edited Landscape" loading="lazy" />
               </div>
               <div class="carousel-slide">
-                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true" alt="Night Photography" />
+                <img src="https://github.com/alejandrosaenz117/saenzag-photos-www/blob/master/src/assets/gallery_night_colors/IMG_3019.jpg?raw=true" alt="Night Photography" loading="lazy" />
               </div>
               
               <div class="carousel-controls">
@@ -945,6 +1578,239 @@
 
     <!-- Custom scripts for this template -->
     <script src="./node_modules/startbootstrap-resume/js/resume.min.js"></script>
+    
+    <!-- Modern Enhancement Scripts -->
+    <script>
+      // Typing animation for hero section
+      const texts = [
+        "Staff Product Security Engineer",
+        "Software Developer",
+        "Open Source Contributor",
+      ];
+      
+      let textIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typingSpeed = 100;
+      const deletingSpeed = 50;
+      const pauseTime = 2000;
+      
+      function typeText() {
+        const currentText = texts[textIndex];
+        const typedElement = document.getElementById('typed-text');
+        
+        if (!isDeleting) {
+          typedElement.textContent = currentText.substring(0, charIndex + 1);
+          charIndex++;
+          
+          if (charIndex === currentText.length) {
+            setTimeout(() => isDeleting = true, pauseTime);
+          }
+        } else {
+          typedElement.textContent = currentText.substring(0, charIndex - 1);
+          charIndex--;
+          
+          if (charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+          }
+        }
+        
+        const speed = isDeleting ? deletingSpeed : typingSpeed;
+        setTimeout(typeText, speed);
+      }
+      
+      // Start typing animation when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(typeText, 1000);
+      });
+      
+      // Smooth reveal animations on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = '0.2s';
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+      
+      // Observe all resume sections
+      document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.resume-section');
+        sections.forEach((section, index) => {
+          section.style.animationDelay = `${index * 0.1}s`;
+          observer.observe(section);
+        });
+      });
+    </script>
+    
+    <!-- GitHub Repository Fetcher Script -->
+    <script>
+      // GitHub repositories to showcase
+      const repositories = [
+        'softrams/bulwark',
+        'alejandrosaenz117/fetch-cwe-list'
+      ];
+
+      // Language colors (GitHub standard colors)
+      const languageColors = {
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#2b7489',
+        'Python': '#3572A5',
+        'Java': '#b07219',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Shell': '#89e051',
+        'Dockerfile': '#384d54',
+        'Vue': '#2c3e50',
+        'Angular': '#dd1b16',
+        'React': '#61dafb'
+      };
+
+      async function fetchRepoData(repo) {
+        try {
+          const response = await fetch(`https://api.github.com/repos/${repo}`);
+          if (!response.ok) throw new Error('Failed to fetch repository data');
+          return await response.json();
+        } catch (error) {
+          console.error(`Error fetching data for ${repo}:`, error);
+          return null;
+        }
+      }
+
+      function sanitizeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function formatNumber(num) {
+        if (num >= 1000) {
+          return (num / 1000).toFixed(1) + 'k';
+        }
+        return num.toString();
+      }
+
+      function createRepoCard(repoData) {
+        const languageColor = languageColors[repoData.language] || '#6c757d';
+        
+        // Sanitize all user-controlled data
+        const safeName = sanitizeHTML(repoData.name || '');
+        const safeDescription = sanitizeHTML(repoData.description || 'No description available.');
+        const safeLanguage = sanitizeHTML(repoData.language || '');
+        const safeUrl = repoData.html_url; // GitHub URLs are trusted
+        
+        return `
+          <div class="repo-card">
+            <div class="repo-header">
+              <div class="repo-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="repo-title">
+                ${safeName}
+              </a>
+            </div>
+            
+            <div class="repo-description">
+              ${safeDescription}
+            </div>
+            
+            <div class="repo-stats">
+              <div class="repo-stat">
+                <i class="fas fa-star"></i>
+                <span>${formatNumber(repoData.stargazers_count)}</span>
+              </div>
+              <div class="repo-stat">
+                <i class="fas fa-code-branch"></i>
+                <span>${formatNumber(repoData.forks_count)}</span>
+              </div>
+              <div class="repo-stat">
+                <i class="fas fa-eye"></i>
+                <span>${formatNumber(repoData.watchers_count)}</span>
+              </div>
+              ${repoData.open_issues_count ? `
+              <div class="repo-stat">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${repoData.open_issues_count}</span>
+              </div>
+              ` : ''}
+            </div>
+            
+            ${repoData.language ? `
+            <div class="repo-language">
+              <span class="language-dot" style="background-color: ${languageColor}"></span>
+              ${safeLanguage}
+            </div>
+            ` : ''}
+            
+            <div class="repo-links">
+              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="repo-link">
+                <i class="fab fa-github"></i>
+                View Repository
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      async function loadRepositories() {
+        const container = document.getElementById('repo-container');
+        
+        try {
+          const repoPromises = repositories.map(repo => fetchRepoData(repo));
+          const repoDataArray = await Promise.all(repoPromises);
+          
+          // Filter out failed requests
+          const validRepos = repoDataArray.filter(data => data !== null);
+          
+          if (validRepos.length === 0) {
+            container.innerHTML = `
+              <div class="repo-loading">
+                <i class="fas fa-exclamation-triangle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                Unable to load repository data at this time.
+              </div>
+            `;
+            return;
+          }
+          
+          // Sort by stars (descending)
+          validRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+          
+          container.innerHTML = validRepos.map(createRepoCard).join('');
+          
+        } catch (error) {
+          console.error('Error loading repositories:', error);
+          container.innerHTML = `
+            <div class="repo-loading">
+              <i class="fas fa-exclamation-triangle" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+              Failed to load repositories. Please try again later.
+            </div>
+          `;
+        }
+      }
+
+      // Load repositories when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        // Use Intersection Observer to load repos only when section is visible
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadRepositories();
+              observer.disconnect(); // Load only once
+            }
+          });
+        });
+        
+        const repoSection = document.getElementById('opensource');
+        if (repoSection) observer.observe(repoSection);
+      });
+    </script>
     
     <!-- Modern Photo Carousel Script -->
     <script>
