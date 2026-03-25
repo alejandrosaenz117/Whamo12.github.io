@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.youtube.com https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: https://github.com https://raw.githubusercontent.com https://avatars.githubusercontent.com; connect-src https://api.github.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.youtube.com https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: https://github.com https://raw.githubusercontent.com https://avatars.githubusercontent.com; connect-src https://api.github.com https://cdn.jsdelivr.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com;" />
 
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="./profile.png" />
 
     <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
@@ -810,8 +810,8 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
@@ -1533,14 +1533,56 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha384-leGYpHE9Tc4N9OwRd98xg6YFpB9shlc/RkilpFi0ljr3QD4tFoFptZvgnnzzwG4Q" crossorigin="anonymous"></script>
+    <!-- Nav scroll behaviors (vanilla JS replacement for resume.min.js + jQuery) -->
+    <script>
+      'use strict';
 
-    <!-- Custom scripts for this template -->
-    <script src="https://cdn.jsdelivr.net/npm/startbootstrap-resume@5.0.8/js/resume.min.js" integrity="sha384-tAmIEbk3ccde/tJz/omTs70iypFzuATN2/DJlgHojN951CeNTT82EpMzEX3JiSp2" crossorigin="anonymous"></script>
+      // Smooth scroll to section on nav link click
+      document.querySelectorAll('a.js-scroll-trigger[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }, { passive: false });
+      });
+
+      // Close mobile navbar when a nav link is clicked
+      document.querySelectorAll('.js-scroll-trigger').forEach(function (el) {
+        el.addEventListener('click', function () {
+          const navCollapse = document.querySelector('.navbar-collapse');
+          if (navCollapse && navCollapse.classList.contains('show')) {
+            bootstrap.Collapse.getOrCreateInstance(navCollapse).hide();
+          }
+        });
+      });
+
+      // Scrollspy: highlight active nav link based on scroll position
+      (function () {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#sideNav .nav-link');
+
+        function onScroll() {
+          const scrollY = window.scrollY;
+          let current = '';
+          sections.forEach(function (section) {
+            if (scrollY >= section.offsetTop - 80) {
+              current = section.getAttribute('id');
+            }
+          });
+          navLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+          });
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
     
     <!-- Modern Enhancement Scripts -->
     <script>
@@ -1702,7 +1744,7 @@
               ${repoData.open_issues_count ? `
               <div class="repo-stat">
                 <i class="fas fa-exclamation-circle"></i>
-                <span>${repoData.open_issues_count}</span>
+                <span>${formatNumber(parseInt(repoData.open_issues_count, 10) || 0)}</span>
               </div>
               ` : ''}
             </div>
