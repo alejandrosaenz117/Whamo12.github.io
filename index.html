@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.youtube.com https://www.youtube-nocookie.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data: https://github.com https://raw.githubusercontent.com https://avatars.githubusercontent.com; connect-src https://api.github.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com;" />
 
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -21,7 +22,7 @@
     <link rel="apple-touch-icon" href="./profile.png" />
 
     <!-- Bootstrap core CSS -->
-    <link href="./node_modules/startbootstrap-resume/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
     <!-- Preload critical resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
@@ -32,10 +33,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" integrity="sha384-mTX5j/NIzlehkuOql3BYfNpkDrnvRHS5S7V3ctncUhJjtlL1+85q8lCKi8A5sUb+" crossorigin="anonymous" />
 
     <!-- Custom styles for this template -->
-    <link href="./node_modules/startbootstrap-resume/css/resume.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/startbootstrap-resume@5.0.8/css/resume.min.css" rel="stylesheet" integrity="sha384-Qdz8HzaX5aw1iAw03n0D/YfZvvljykhfto1w0tyFhabE3DtlzaGW+/IZEC9Lh31z" crossorigin="anonymous" />
 
     <!-- Your custom CSS for the list items -->
     <style>
@@ -1532,14 +1533,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="./node_modules/startbootstrap-resume/vendor/jquery/jquery.min.js"></script>
-    <script src="./node_modules/startbootstrap-resume/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="./node_modules/startbootstrap-resume/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha384-leGYpHE9Tc4N9OwRd98xg6YFpB9shlc/RkilpFi0ljr3QD4tFoFptZvgnnzzwG4Q" crossorigin="anonymous"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="./node_modules/startbootstrap-resume/js/resume.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/startbootstrap-resume@5.0.8/js/resume.min.js" integrity="sha384-tAmIEbk3ccde/tJz/omTs70iypFzuATN2/DJlgHojN951CeNTT82EpMzEX3JiSp2" crossorigin="anonymous"></script>
     
     <!-- Modern Enhancement Scripts -->
     <script>
@@ -1667,7 +1668,8 @@
         const safeName = sanitizeHTML(repoData.name || '');
         const safeDescription = sanitizeHTML(repoData.description || 'No description available.');
         const safeLanguage = sanitizeHTML(repoData.language || '');
-        const safeUrl = repoData.html_url; // GitHub URLs are trusted
+        const parsedUrl = new URL(repoData.html_url);
+        const safeUrl = (parsedUrl.protocol === 'https:' && parsedUrl.hostname === 'github.com') ? parsedUrl.href : '#';
         
         return `
           <div class="repo-card">
