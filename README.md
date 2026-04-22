@@ -4,11 +4,12 @@ My personal portfolio and resume website showcasing experience in application se
 
 ## Features
 
-- Responsive design with dark/light mode support
-- Professional experience and project showcase
-- Open source contributions dashboard
-- Photography gallery
-- Content & speaking engagements
+- Responsive design (mobile-first)
+- Professional experience and job history
+- Open source projects showcase with GitHub stats
+- Photography gallery with carousel
+- Speaking engagements and content links
+- Skill tags with icons
 
 ## Tech Stack
 
